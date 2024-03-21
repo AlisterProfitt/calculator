@@ -1,1 +1,1 @@
-# calculator
+This is it! The final project in the Foundations portion of the lesson!!! Let's see if I am able to live up to the task. Everyone says how this is quite hard and that it will take multiple days. Hopefully I can finish this within a week of making this repository!!!
