@@ -1,0 +1,89 @@
+.main-body {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+}
+
+.display {
+    border: 8px solid black;
+    height: 80px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    font-size: 50px;
+}
+
+.calculator-body {
+    display: flex;
+    flex: 1;
+    border: 2px solid black;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    border: 2px solid black;
+}
+
+.numbers {
+    display: flex;
+    flex: 1;
+    border: 2px solid black;
+    flex-direction: column;
+}
+
+.zeroth-row,
+.first-row,
+.second-row,
+.third-row,
+.fourth-row {
+    display: flex;
+    flex: 1;
+    border: 2px solid black;
+}
+
+.digit {
+    flex: 1;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+.symbols {
+    display: flex;
+    flex: 1;
+    border: 2px solid black;
+    font-size: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+#clear,
+#equal,
+#plusminus {
+    display: flex;
+    flex: 1;
+    font-size: 50px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+}
+
+#zero {
+    flex: 2.02;
+}
+
+#decimal {
+    display: flex;
+    flex: 1;
+    font-size: 50px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    padding-bottom: 20px;
+}
