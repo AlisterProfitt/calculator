@@ -1,3 +1,8 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
 .main-body {
     display: flex;
     flex-direction: column;
@@ -8,13 +13,14 @@
 
 .second-display {
     display: flex;
-    height: 20px;
+    height: 30px;
     background-color: lightblue;
-    font-size: 15px;
+    font-size: 30px;
+    justify-content: end;
 }
 
 .display {
-    height: 80px;
+    height: 60px;
     display: flex;
     justify-content: end;
     align-items: start;

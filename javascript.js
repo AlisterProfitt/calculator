@@ -70,7 +70,7 @@ one.addEventListener('click', () => {
         numbers = '';
         display.textContent += '1';
         numbers += '1';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '1';
         numbers += '1';
     }
@@ -82,7 +82,7 @@ two.addEventListener('click', () => {
         numbers = '';
         display.textContent += '2';
         numbers += '2';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '2';
         numbers += '2';
     }
@@ -94,7 +94,7 @@ three.addEventListener('click', () => {
         numbers = '';
         display.textContent += '3';
         numbers += '3';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '3';
         numbers += '3';
     }
@@ -106,7 +106,7 @@ four.addEventListener('click', () => {
         numbers = '';
         display.textContent += '4';
         numbers += '4';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '4';
         numbers += '4';
     }
@@ -118,7 +118,7 @@ five.addEventListener('click', () => {
         numbers = '';
         display.textContent += '5';
         numbers += '5';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '5';
         numbers += '5';
     }
@@ -130,7 +130,7 @@ six.addEventListener('click', () => {
         numbers = '';
         display.textContent += '6';
         numbers += '6';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '6';
         numbers += '6';
     }
@@ -142,7 +142,7 @@ seven.addEventListener('click', () => {
         numbers = '';
         display.textContent += '7';
         numbers += '7';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '7';
         numbers += '7';
     }
@@ -154,7 +154,7 @@ eight.addEventListener('click', () => {
         numbers = '';
         display.textContent += '8';
         numbers += '8';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '8';
         numbers += '8';
     }
@@ -166,7 +166,7 @@ nine.addEventListener('click', () => {
         numbers = '';
         display.textContent += '9';
         numbers += '9';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent.length < 10) {
         display.textContent += '9';
         numbers += '9';
     }
@@ -178,7 +178,8 @@ zero.addEventListener('click', () => {
         numbers = '';
         display.textContent = '0';
         numbers = '0';
-    } else if (numbers.length < 10) {
+    } else if (display.textContent == '0') {
+    } else if (display.textContent.length < 10) {
         display.textContent += '0';
         numbers += '0';
     }
@@ -192,7 +193,7 @@ decimal.addEventListener('click', () => {
             numbers += '.';
         } else if (initialDecimal) {
 
-        } else {
+        } else if (display.textContent.length < 10) {
             display.textContent += '.';
             numbers += '.';
         }
@@ -205,134 +206,203 @@ clear.addEventListener('click', () => {
     splitNumbers = [];
     initial = true;
     initialDecimal = false;
+    secondDisplay.textContent = '';
 })
 backspace.addEventListener('click', () => {
-    if (numbers.at(-1) == ' ') {
-        numbers = numbers.slice(0, -3);
-        display.textContent = numbers;
-    } else if (numbers.length == 1) {
-        numbers = '0';
-        display.textContent = '0';
-        initial = true;
-        initialDecimal = false;
-    } else if (numbers.at(-1) == '.') {
-        numbers = numbers.slice(0, -1);
-        display.textContent = numbers;
-        initialDecimal = false;
-    } else {
-        numbers = numbers.slice(0, -1);
-        display.textContent = numbers;
+    if (display.textContent) {
+        if (display.textContent.length == 1) {
+            display.textContent = '';
+            numbers = numbers.slice(0, -1);
+        }
+        else {
+            display.textContent = display.textContent.slice(0, -1);
+            numbers = numbers.slice(0, -1);
+        }
     }
 })
 
 
 addition.addEventListener('click', () => {
     splitNumbers = numbers.split(' ');
-    if (splitNumbers[splitNumbers.length-1] == '') {
+    if (numbers == 'Ouch!!!') {
+
+    } else if (splitNumbers[splitNumbers.length-1] == '') {
         splitNumbers[splitNumbers.length-2] = '+';
         numbers = splitNumbers.join(' ');
-        display.textContent = numbers;
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     } else if (splitNumbers.length == 3 && splitNumbers[splitNumbers.length-1]) {
         if (numbers.includes('.')) {
             numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
             numbers = floatify(numbers);
             numbers = numbers.toString() + ' + ';
-            display.textContent = numbers;
-        } else {display.textContent = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' + ';
-        numbers = display.textContent;
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
+        } else {
+            numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' + ';
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
         }
     } else {
-        display.textContent += ' + ';
         numbers += ' + ';
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     }
-    initialDecimal = false;
-    initial = false;
 })
+
 subtraction.addEventListener('click', () => {
     splitNumbers = numbers.split(' ');
-    if (splitNumbers[splitNumbers.length-1] == '') {
+    if (numbers == 'Ouch!!!') {
+
+    } else if (splitNumbers[splitNumbers.length-1] == '') {
         splitNumbers[splitNumbers.length-2] = '-';
         numbers = splitNumbers.join(' ');
-        display.textContent = numbers;
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     } else if (splitNumbers.length == 3 && splitNumbers[splitNumbers.length-1]) {
         if (numbers.includes('.')) {
             numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
             numbers = floatify(numbers);
             numbers = numbers.toString() + ' - ';
-            display.textContent = numbers;
-        } else {display.textContent = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' - ';
-        numbers = display.textContent;
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
+        } else {
+            numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' - ';
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
         }
     } else {
-        display.textContent += ' - ';
         numbers += ' - ';
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     }
-    initialDecimal = false;
-    initial = false;
 })
+
 multiplication.addEventListener('click', () => {
     splitNumbers = numbers.split(' ');
-    if (splitNumbers[splitNumbers.length-1] == '') {
+    if (numbers == 'Ouch!!!') {
+
+    } else if (splitNumbers[splitNumbers.length-1] == '') {
         splitNumbers[splitNumbers.length-2] = '*';
         numbers = splitNumbers.join(' ');
-        display.textContent = numbers;
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     } else if (splitNumbers.length == 3 && splitNumbers[splitNumbers.length-1]) {
         if (numbers.includes('.')) {
             numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
             numbers = floatify(numbers);
             numbers = numbers.toString() + ' * ';
-            display.textContent = numbers;
-        } else {display.textContent = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' * ';
-        numbers = display.textContent;
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
+        } else {
+            numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' * ';
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
         }
     } else {
-        display.textContent += ' * ';
         numbers += ' * ';
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     }
-    initialDecimal = false;
-    initial = false;
 })
+
 division.addEventListener('click', () => {
     splitNumbers = numbers.split(' ');
-    if (splitNumbers[splitNumbers.length-1] == '') {
+    if (numbers == 'Ouch!!!') {
+
+    } else if (splitNumbers[splitNumbers.length-1] == '') {
         splitNumbers[splitNumbers.length-2] = '/';
         numbers = splitNumbers.join(' ');
-        display.textContent = numbers;
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     } else if (splitNumbers.length == 3 && splitNumbers[splitNumbers.length-1]) {
         if (numbers.includes('.')) {
             numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
             numbers = floatify(numbers);
             numbers = numbers.toString() + ' / ';
-            display.textContent = numbers;
-        } else {display.textContent = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' / ';
-        numbers = display.textContent;
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
+        } else {
+            numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2])) + ' / ';
+            secondDisplay.textContent = numbers;
+            display.textContent = '';
+            initialDecimal = false;
+            initial = false;
         }
     } else {
-        display.textContent += ' / ';
-        numbers += ' / ';
+    numbers += ' / ';
+        secondDisplay.textContent = numbers;
+        display.textContent = '';
+        initialDecimal = false;
+        initial = false;
     }
-    initialDecimal = false;
-    initial = false;
 })
 
 equal.addEventListener('click', () => {
     splitNumbers = numbers.split(' ')
     if (numbers == '0 / 0') {
         display.textContent = 'Ouch!!!';
+        secondDisplay.textContent = '';
+        numbers = display.textContent;
         initial = true;
         initialDecimal = false;
     } else if (splitNumbers.length == 3 && splitNumbers[splitNumbers.length-1]) {
         if (numbers.includes('.')) {
+            if (numbers.includes('e')) {
+                numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
+                display.textContent = parseFloat(numbers).toExponential(8);
+                numbers = display.textContent;
+                secondDisplay.textContent = '';
+                splitNumbers = [];
+                initial = true;
+                initialDecimal = false;
+            } else {
             numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
             numbers = floatify(numbers);
             numbers = numbers.toString();
             display.textContent = numbers;
+            secondDisplay.textContent = '';
             splitNumbers = [];
             initial = true;
             initialDecimal = false;
+            }
         } else {
-            display.textContent = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
+            numbers = operate(parseFloat(splitNumbers[0]), splitNumbers[1], parseFloat(splitNumbers[2]));
+            if (numbers.toString().length > 10) {
+                display.textContent = parseInt(numbers).toExponential(8);
+            } else {
+                display.textContent = numbers;
+            }
             numbers = display.textContent;
+            secondDisplay.textContent = '';
             splitNumbers = [];
             initial = true;
             initialDecimal = false;
