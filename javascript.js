@@ -219,6 +219,9 @@ backspace.addEventListener('click', () => {
             numbers = numbers.slice(0, -1);
         }
     }
+    if (!display.textContent.includes('.') {
+        initialDecimal = false;
+    }
 })
 
 
